@@ -1,6 +1,7 @@
 import 'package:ecommerce/components/categories.dart';
 import 'package:ecommerce/constants.dart';
 import 'package:ecommerce/models/product.dart';
+import 'package:ecommerce/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'item_card.dart';
@@ -28,15 +29,23 @@ class Body extends StatelessWidget {
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
           child: GridView.builder(
-              itemCount: products.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.75,
-                  mainAxisSpacing: kDefaultPaddin,
-                  crossAxisSpacing: kDefaultPaddin),
-              itemBuilder: ((context, index) => ItemCard(
-                    product: products[index],
-                  ))),
+            itemCount: products.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                mainAxisSpacing: kDefaultPaddin,
+                crossAxisSpacing: kDefaultPaddin),
+            itemBuilder: ((context, index) => ItemCard(
+                  product: products[index],
+                  press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailsScreen(product: products[index]),
+                    ),
+                  ),
+                )),
+          ),
         ))
       ],
     );
